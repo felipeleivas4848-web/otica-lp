@@ -277,8 +277,9 @@ main > .section:first-child { border-top: 0; }
   pointer-events: none;
 }
 .hero > .wrap { position: relative; }
-.hero h1 { max-width: 16ch; }
-.hero__sub { max-width: 46ch; font-size: var(--step-1); }
+/* largura pensada para a headline cair em 3 linhas (máx. 4) */
+.hero h1 { max-width: 24ch; text-wrap: balance; }
+.hero__sub { max-width: 48ch; font-size: var(--step-1); }
 
 .hero__price { display: flex; flex-direction: column; gap: 0.4em; }
 .price-line { display: inline-flex; align-items: baseline; gap: 0.15em; }
