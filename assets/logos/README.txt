@@ -3,10 +3,12 @@ LOGOS DAS ÓTICAS — seção "Resultados no mercado óptico" (seção 08)
 
 Coloque nesta pasta os arquivos de logo com EXATAMENTE estes nomes:
 
-  oticas-diniz.png
-  oticas-carol.png
-  mercadao-dos-oculos.png
-  oticas-gassi.png
+  oticas-diniz.jpg
+  oticas-carol.jpg
+  mercadao-dos-oculos.jpg
+  oticas-gassi.jpg
+
+(Para trocar por PNG/SVG, ajuste a extensão na tag <img> em index.html.)
 
 Recomendações
 -------------
