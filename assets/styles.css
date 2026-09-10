@@ -36,13 +36,13 @@
   --font-body:    "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono:    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --step--1: 0.83rem;
-  --step-0:  1.0625rem;
-  --step-1:  clamp(1.12rem, 1rem + 0.55vw, 1.32rem);
-  --step-2:  clamp(1.4rem, 1.15rem + 1.15vw, 1.95rem);
-  --step-3:  clamp(1.85rem, 1.45rem + 1.9vw, 2.7rem);
-  --step-4:  clamp(2.3rem, 1.6rem + 3.3vw, 3.5rem);
-  --step-5:  clamp(2.7rem, 1.75rem + 4.9vw, 4.6rem);
+  --step--1: 0.8rem;
+  --step-0:  1rem;
+  --step-1:  clamp(1.05rem, 0.98rem + 0.32vw, 1.2rem);
+  --step-2:  clamp(1.25rem, 1.08rem + 0.7vw, 1.6rem);
+  --step-3:  clamp(1.55rem, 1.3rem + 1vw, 2.1rem);
+  --step-4:  clamp(1.9rem, 1.5rem + 1.7vw, 2.7rem);
+  --step-5:  clamp(2.05rem, 1.55rem + 2.2vw, 3.15rem);
 
   /* -- layout -- */
   --wrap: 74rem;
@@ -104,7 +104,7 @@ a { color: inherit; }
 }
 
 .section {
-  padding-block: clamp(60px, 10vw, 128px);
+  padding-block: clamp(48px, 6.5vw, 92px);
   border-top: 1px solid var(--line-soft);
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
@@ -114,7 +114,7 @@ main > .section:first-child { border-top: 0; }
 .section__inner--wide { max-width: none; }
 
 .stack > * + * { margin-top: var(--flow, 1.15em); }
-.stack--lg > * + * { --flow: 2em; }
+.stack--lg > * + * { --flow: 1.6em; }
 .stack--sm > * + * { --flow: 0.55em; }
 
 /* ---------------- text helpers ---------------- */
@@ -264,7 +264,8 @@ main > .section:first-child { border-top: 0; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding-top: clamp(44px, 8vw, 88px);
+  padding-top: clamp(28px, 4vw, 52px);
+  padding-bottom: clamp(48px, 6vw, 84px);
 }
 .hero::before {
   content: "";
