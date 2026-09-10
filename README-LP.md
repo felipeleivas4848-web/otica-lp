@@ -11,10 +11,14 @@ automaticamente, sem backend.
 
 ```
 index.html            → a página inteira (15 seções + rodapé)
+obrigado.html          → página de agradecimento (destino do formulário)
 assets/styles.css      → tema dark premium (cores em variáveis no topo)
 assets/script.js       → máscara de WhatsApp, validação e envio pro Sheets
 apps-script/Codigo.gs   → script que recebe o formulário e escreve na planilha
 ```
+
+Ao enviar o formulário com sucesso, o visitante é redirecionado para
+`obrigado.html`. Para mudar o destino, edite `PAGINA_OBRIGADO` em `assets/script.js`.
 
 ## Testar no seu computador
 

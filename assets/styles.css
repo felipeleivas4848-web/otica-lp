@@ -756,15 +756,20 @@ main > .section:first-child { border-top: 0; }
 }
 .form__error:empty { min-height: 0; }
 
-.form__success {
-  border: 1px solid var(--accent-line);
-  background: var(--accent-soft);
-  border-radius: var(--radius-lg);
-  padding: 2.2em;
+/* ---------------- página de obrigado ---------------- */
+.thanks { padding-top: clamp(56px, 10vw, 120px); }
+.thanks__mark {
+  width: 64px;
+  height: 64px;
   display: grid;
-  gap: 0.6em;
+  place-items: center;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 6px var(--accent-soft), 0 0 32px -4px var(--accent);
 }
-.form__success h3 { color: var(--accent); }
+.thanks__mark svg { width: 32px; height: 32px; }
+.thanks h1 { max-width: 18ch; }
 
 /* ---------------- FAQ (sec 14) ---------------- */
 .faq { display: grid; border-top: 1px solid var(--line-soft); }

@@ -7,6 +7,9 @@
    2) Cole aqui a URL do App da Web (termina em /exec). */
 const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbyY5_-0vs8Q1y0WaJOzcwF3cgWOd3KUJW2AhjRwT3ckiCC0MRZ354IqCx80XDmlMR9Dng/exec"; // <-- COLE A URL AQUI
 
+/* Página para onde o visitante vai depois de enviar o formulário. */
+const PAGINA_OBRIGADO = "obrigado.html";
+
 /* Grupos de resposta obrigatória (radios). */
 const GRUPOS_OBRIGATORIOS = [
   "cargo", "ja_investe", "faturamento",
@@ -15,7 +18,6 @@ const GRUPOS_OBRIGATORIOS = [
 
 const form = document.getElementById("form-analise");
 const statusEl = document.getElementById("form-status");
-const successEl = document.getElementById("form-success");
 
 /* ---------- máscara de WhatsApp: (00) 00000-0000 ---------- */
 const wpp = document.getElementById("whatsapp");
@@ -91,9 +93,8 @@ if (form) {
           "Configure a URL do Apps Script em assets/script.js. Envio simulado."
         );
       }
-      form.hidden = true;
-      successEl.hidden = false;
-      successEl.scrollIntoView({ behavior: "smooth", block: "center" });
+      // deu certo -> vai para a página de obrigado
+      window.location.href = PAGINA_OBRIGADO;
     } catch (err) {
       console.error("[Ótica com IA] Falha ao enviar:", err);
       btn.disabled = false;
