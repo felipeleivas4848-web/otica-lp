@@ -614,10 +614,10 @@ main > .section:first-child { border-top: 0; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 88px;
-  height: 88px;
+  width: 84px;
+  height: 84px;
   flex: none;
-  padding: 4px;
+  padding: 0;
   background: #ffffff;
   border-radius: 50%;
   overflow: hidden;
@@ -630,6 +630,8 @@ main > .section:first-child { border-top: 0; }
   height: 100%;
   object-fit: cover;
   display: block;
+  /* aproxima a arte da logo dentro do mesmo medalhão */
+  transform: scale(1.35);
 }
 .case__name {
   font-family: var(--font-display);
