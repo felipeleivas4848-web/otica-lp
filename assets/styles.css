@@ -104,7 +104,7 @@ a { color: inherit; }
 }
 
 .section {
-  padding-block: clamp(48px, 6.5vw, 92px);
+  padding-block: clamp(56px, 7.5vw, 108px);
   border-top: 1px solid var(--line-soft);
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
@@ -113,9 +113,13 @@ main > .section:first-child { border-top: 0; }
 .section__inner { max-width: var(--measure); }
 .section__inner--wide { max-width: none; }
 
-.stack > * + * { margin-top: var(--flow, 1.15em); }
-.stack--lg > * + * { --flow: 1.6em; }
+.stack > * + * { margin-top: var(--flow, 1.25em); }
+.stack--lg > * + * { --flow: 2.1em; }
 .stack--sm > * + * { --flow: 0.55em; }
+
+/* respiro extra logo abaixo de um título de seção */
+.section__inner > h2 + *,
+.stack--lg > .stack + * { margin-top: 2.6em; }
 
 /* ---------------- text helpers ---------------- */
 .eyebrow {
@@ -279,7 +283,10 @@ main > .section:first-child { border-top: 0; }
 .hero > .wrap { position: relative; }
 /* largura pensada para a headline cair em 3 linhas (máx. 4) */
 .hero h1 { max-width: 24ch; text-wrap: balance; }
+.hero h1 + * { margin-top: 1.5em; }
 .hero__sub { max-width: 48ch; font-size: var(--step-1); }
+.hero__price { margin-top: 1.9em; }
+.hero__cta { margin-top: 1.9em; }
 
 .hero__price { display: flex; flex-direction: column; gap: 0.4em; }
 .price-line { display: inline-flex; align-items: baseline; gap: 0.15em; white-space: nowrap; }
