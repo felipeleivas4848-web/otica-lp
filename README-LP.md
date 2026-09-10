@@ -73,11 +73,10 @@ O envio para o Sheets funciona igual em qualquer um (é um POST externo).
 | Cores / tema | `assets/styles.css`, bloco `:root` no topo |
 | Botões de CTA | hoje todos rolam até o formulário (`href="#formulario"`) |
 | Seção **Garantia (11)** | está `hidden` no `index.html` (conforme observação da copy). Remova o atributo `hidden` da `<section id="garantia">` para exibir |
-| Prints dos cases (seção 8) | trocar os blocos `[ Inserir case / print ]` por `<img>` |
 | Links do rodapé | Política de Privacidade / Termos / Contato apontam para `#` |
+| Espaçamento vertical | tokens `--space-*` em `:root`; ritmo por `.section-head` / `.section-body` |
 
 ## Observações da copy ainda em aberto
 
 - **Garantia (seção 11):** critérios não definidos → seção começa oculta.
-- **Cases (seção 8):** faltam os prints/telas de comprovação.
 - **Botões de CTA:** definir se levam ao formulário (atual) ou a um WhatsApp.
