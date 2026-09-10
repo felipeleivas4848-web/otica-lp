@@ -609,22 +609,27 @@ main > .section:first-child { border-top: 0; }
   align-items: flex-start;
   gap: 0.9em;
 }
-/* logo "solta": arquivos são JPG com fundo branco, então convertemos
-   para monocromático claro e removemos o branco via mix-blend-mode. */
+/* medalhão redondo: disco branco + arco branco fino em volta */
 .case__logo {
   display: inline-flex;
   align-items: center;
-  height: 38px;
-  max-width: 170px;
+  justify-content: center;
+  width: 66px;
+  height: 66px;
+  flex: none;
+  padding: 8px;
+  background: #ffffff;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 3px var(--ink),
+    0 0 0 4px rgba(255, 255, 255, 0.55);
 }
 .case__logo img {
+  width: 100%;
   height: 100%;
-  width: auto;
-  max-width: 100%;
   object-fit: contain;
   display: block;
-  filter: grayscale(1) invert(1) brightness(1.7) contrast(1.05);
-  mix-blend-mode: screen;
 }
 .case__name {
   font-family: var(--font-display);
