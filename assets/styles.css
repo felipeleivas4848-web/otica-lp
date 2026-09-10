@@ -626,17 +626,27 @@ main > .section:first-child { border-top: 0; }
   text-transform: uppercase;
   color: var(--text-mute);
 }
+/* uma linha por métrica: rótulo à esquerda, número à direita.
+   evita dois números lado a lado se misturarem visualmente. */
 .case__grid {
   margin: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.9em 1em;
+  gap: 0;
 }
-.case__grid div { display: grid; gap: 0.15em; }
+.case__grid div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.2em;
+  padding-block: 0.65em;
+  border-top: 1px solid var(--line-soft);
+}
+.case__grid div:first-child { border-top: 0; padding-top: 0; }
+.case__grid div:last-child { padding-bottom: 0; }
 .case__grid dt {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-mute);
 }
@@ -644,8 +654,11 @@ main > .section:first-child { border-top: 0; }
   margin: 0;
   font-family: var(--font-mono);
   font-size: var(--step-0);
+  font-weight: 500;
+  color: var(--text);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+  text-align: right;
 }
 .case__slot {
   margin-top: auto;
