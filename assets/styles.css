@@ -741,6 +741,12 @@ main > .section:first-child { border-top: 0; }
   color: var(--accent);
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.stats__u {
+  font-size: 0.5em;
+  color: var(--text-dim);
+  letter-spacing: 0;
 }
 .stats__k {
   font-family: var(--font-mono);
