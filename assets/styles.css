@@ -282,7 +282,7 @@ main > .section:first-child { border-top: 0; }
 .hero__sub { max-width: 48ch; font-size: var(--step-1); }
 
 .hero__price { display: flex; flex-direction: column; gap: 0.4em; }
-.price-line { display: inline-flex; align-items: baseline; gap: 0.15em; }
+.price-line { display: inline-flex; align-items: baseline; gap: 0.15em; white-space: nowrap; }
 .price-line__v {
   font-family: var(--font-mono);
   font-weight: 600;
@@ -377,6 +377,7 @@ main > .section:first-child { border-top: 0; }
   font-size: var(--step-2);
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .readout__lbl {
   font-family: var(--font-mono);
@@ -570,6 +571,7 @@ main > .section:first-child { border-top: 0; }
   color: var(--accent);
   letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .case__headline-k {
   font-family: var(--font-mono);
@@ -597,6 +599,7 @@ main > .section:first-child { border-top: 0; }
   font-family: var(--font-mono);
   font-size: var(--step-0);
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .case__slot {
   margin-top: auto;
