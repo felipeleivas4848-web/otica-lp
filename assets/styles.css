@@ -51,6 +51,14 @@
   --radius: 5px;
   --radius-lg: 12px;
   --header-h: 62px;
+
+  /* -- escala de espaçamento vertical (ritmo da página) -- */
+  --space-2xs: 0.55rem;
+  --space-xs:  0.9rem;
+  --space-s:   1.25rem;
+  --space-m:   1.7rem;
+  --space-l:   2.6rem;
+  --space-xl:  3.4rem;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -104,22 +112,56 @@ a { color: inherit; }
 }
 
 .section {
-  padding-block: clamp(56px, 7.5vw, 108px);
+  padding-block: clamp(56px, 7.5vw, 104px);
   border-top: 1px solid var(--line-soft);
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
 main > .section:first-child { border-top: 0; }
 
-.section__inner { max-width: var(--measure); }
-.section__inner--wide { max-width: none; }
+.section__inner { max-width: none; }
 
-.stack > * + * { margin-top: var(--flow, 1.25em); }
-.stack--lg > * + * { --flow: 2.1em; }
-.stack--sm > * + * { --flow: 0.55em; }
+/* ============================================================
+   RITMO VERTICAL — um único sistema para toda a página.
+   cabeçalho da seção (.section-head) : espaços curtos
+   corpo da seção     (.section-body) : espaços médios
+   entre cabeçalho e corpo            : espaço grande
+   ============================================================ */
 
-/* respiro extra logo abaixo de um título de seção */
-.section__inner > h2 + *,
-.stack--lg > .stack + * { margin-top: 2.6em; }
+/* largura de leitura: cabeçalho sempre estreito; corpo estreito,
+   exceto quando a seção é --wide (grades de cards/cases). */
+.section-head { max-width: var(--measure); }
+.section-body { max-width: var(--measure); }
+.section__inner--wide .section-body { max-width: none; }
+.section__inner--wide .section-body > .fineprint { max-width: var(--measure); }
+
+/* --- cabeçalho: eyebrow / badge -> h2 -> lede --- */
+.section-head > * + *      { margin-top: var(--space-xs); }
+.section-head > h1 + .lede,
+.section-head > h2 + .lede { margin-top: var(--space-s); }
+
+/* --- salto do cabeçalho para o corpo --- */
+.section-head + .section-body { margin-top: var(--space-l); }
+
+/* --- corpo: ritmo padrão entre blocos --- */
+.section-body > * + *               { margin-top: var(--space-m); }
+.section-body > p + p               { margin-top: var(--space-s); }
+.section-body > .h-kicker + *       { margin-top: var(--space-xs); }
+.section-body > * + .fineprint      { margin-top: var(--space-s); }
+.section-body > * + .cta-row        { margin-top: var(--space-l); }
+.section-body > * + .big-statement,
+.section-body > .big-statement + *  { margin-top: var(--space-l); }
+
+/* --- linha de botão(ões) --- */
+.cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+
+/* --- hero: mesmo sistema, âncoras próprias --- */
+.hero__inner > * + *                 { margin-top: var(--space-s); }
+.hero__inner > .badge + h1           { margin-top: var(--space-m); }
+.hero__inner > h1 + *                { margin-top: var(--space-m); }
+.hero__inner > * + .hero__price      { margin-top: var(--space-l); }
+.hero__inner > * + .hero__checks     { margin-top: var(--space-m); }
+.hero__inner > * + .cta-row          { margin-top: var(--space-l); }
+.hero__inner > * + .fineprint        { margin-top: var(--space-s); }
 
 /* ---------------- text helpers ---------------- */
 .eyebrow {
@@ -281,13 +323,10 @@ main > .section:first-child { border-top: 0; }
   pointer-events: none;
 }
 .hero > .wrap { position: relative; }
+.hero__inner { max-width: 52rem; }
 /* largura pensada para a headline cair em 3 linhas (máx. 4) */
 .hero h1 { max-width: 24ch; text-wrap: balance; }
-.hero h1 + * { margin-top: 1.5em; }
 .hero__sub { max-width: 48ch; font-size: var(--step-1); }
-.hero__price { margin-top: 1.9em; }
-.hero__cta { margin-top: 1.9em; }
-
 .hero__price { display: flex; flex-direction: column; gap: 0.4em; }
 .price-line { display: inline-flex; align-items: baseline; gap: 0.15em; white-space: nowrap; }
 .price-line__v {
@@ -654,9 +693,11 @@ main > .section:first-child { border-top: 0; }
 
 /* ---------------- offer (sec 10) ---------------- */
 .offer {
+  display: grid;
+  gap: var(--space-m);
   border: 1px solid var(--accent-line);
   border-radius: var(--radius-lg);
-  padding: clamp(1.5em, 4vw, 2.6em);
+  padding: clamp(1.6em, 4vw, 2.6em);
   background:
     radial-gradient(120% 80% at 100% 0%, var(--accent-soft), transparent 55%),
     var(--surface);
@@ -841,7 +882,7 @@ main > .section:first-child { border-top: 0; }
   padding-block: clamp(40px, 7vw, 72px);
   background: var(--ink);
 }
-.site-footer .wrap { --flow: 1.4em; }
+.site-footer .wrap { display: grid; gap: var(--space-s); }
 .site-footer__top {
   display: flex;
   flex-wrap: wrap;
