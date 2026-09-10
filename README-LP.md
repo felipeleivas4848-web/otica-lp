@@ -73,6 +73,7 @@ O envio para o Sheets funciona igual em qualquer um (é um POST externo).
 | Cores / tema | `assets/styles.css`, bloco `:root` no topo |
 | Botões de CTA | hoje todos rolam até o formulário (`href="#formulario"`) |
 | Seção **Garantia (11)** | está `hidden` no `index.html` (conforme observação da copy). Remova o atributo `hidden` da `<section id="garantia">` para exibir |
+| Logos das óticas (seção 8) | colocar os arquivos em `assets/logos/` — nomes exatos em `assets/logos/README.txt`. Sem o arquivo, aparece só o nome em texto |
 | Links do rodapé | Política de Privacidade / Termos / Contato apontam para `#` |
 | Espaçamento vertical | tokens `--space-*` em `:root`; ritmo por `.section-head` / `.section-body` |
 
