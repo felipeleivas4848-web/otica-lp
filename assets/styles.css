@@ -631,7 +631,7 @@ main > .section:first-child { border-top: 0; }
   object-fit: cover;
   display: block;
   /* aproxima a arte da logo dentro do mesmo medalhão */
-  transform: scale(1.35);
+  transform: scale(1.12);
 }
 .case__name {
   font-family: var(--font-display);
