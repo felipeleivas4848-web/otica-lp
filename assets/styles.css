@@ -20,12 +20,12 @@
   --text-dim:   #9BA8B4;
   --text-mute:  #67727E;
 
-  /* -- accent: azul-ciano de tratamento antirreflexo -- */
-  --accent:       #27D3C4;
-  --accent-deep:  #0FA79B;
-  --accent-ink:   #04110F;
-  --accent-soft:  rgba(39, 211, 196, 0.10);
-  --accent-line:  rgba(39, 211, 196, 0.34);
+  /* -- accent: azul ótico — confiança, clareza, saúde visual -- */
+  --accent:       #2F6FED;
+  --accent-deep:  #1E52C2;
+  --accent-ink:   #F5F9FF;
+  --accent-soft:  rgba(47, 111, 237, 0.13);
+  --accent-line:  rgba(47, 111, 237, 0.40);
 
   /* -- semânticas (separadas do accent) -- */
   --pos:  #4BD98D;
