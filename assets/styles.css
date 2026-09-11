@@ -673,42 +673,6 @@ main > .section:first-child { border-top: 0; }
 }
 .section--stats .fineprint { margin-top: var(--space-s); }
 
-/* ---------------- depoimentos (sec 08b) ---------------- */
-.quotes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-  gap: 1.25rem;
-}
-.quote {
-  margin: 0;
-  display: grid;
-  gap: 1.2em;
-  align-content: start;
-  padding: 1.7em 1.6em;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-}
-.quote blockquote {
-  margin: 0;
-  font-size: var(--step-1);
-  line-height: 1.5;
-}
-.quote blockquote::before { content: "\201C"; color: var(--accent); margin-right: 0.06em; }
-.quote blockquote::after  { content: "\201D"; color: var(--accent); margin-left: 0.06em; }
-.quote figcaption { display: grid; gap: 0.2em; }
-.quote__name {
-  font-family: var(--font-display);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-.quote__role {
-  font-family: var(--font-mono);
-  font-size: var(--step--1);
-  letter-spacing: 0.06em;
-  color: var(--text-mute);
-}
-
 /* ---------------- chain (sec 09) ---------------- */
 .chain {
   list-style: none;
