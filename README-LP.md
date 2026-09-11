@@ -52,9 +52,35 @@ Versão: Nova versão → Implantar. A URL não muda.
 
 ### Colunas que chegam na planilha
 
+Aba **Leads** (formulário completo, seção 13):
 `data_hora`, `nome`, `otica`, `cidade`, `estado`, `whatsapp`, `cargo`,
 `ja_investe`, `faturamento`, `investimento_mensal`, `objetivo`, `inicio`,
 `origem`, `utm`, `pagina`, `enviado_em`.
+
+Aba **Emails** (popup de captura rápida):
+`data_hora`, `email`, `origem`, `utm`, `pagina`.
+
+## Popup de captura de e-mail
+
+Aparece uma vez por visitante — depois de 12s na página ou ao passar de
+metade da rolagem, o que vier primeiro. Some sozinho se a pessoa já
+preencheu o formulário completo. Não reaparece na mesma máquina depois
+de fechado (usa `localStorage`).
+
+**Levar os e-mails para o Meta (públicos/anúncios) — duas formas:**
+
+1. **Manual, sem precisar de nada extra:** exporte a aba **Emails** da
+   planilha (Arquivo → Fazer download → CSV) e suba em
+   **Gerenciador de Anúncios → Públicos → Criar público personalizado →
+   Lista de clientes**. O Meta cruza os e-mails com contas existentes.
+2. **Automático, em tempo real:** quando você instalar o **Pixel do Meta**
+   na página (código base do `fbq`), o popup já detecta sozinho e passa
+   a enviar cada e-mail via **Advanced Matching** assim que alguém
+   preenche — não precisa mexer em nada além de colar o Pixel.
+
+Não fazemos chamada direta à API do Meta com token de acesso dentro do
+site — isso exporia a credencial no código-fonte. Automação mais forte
+(Conversions API do lado do servidor) é possível depois, via Apps Script.
 
 ## Publicar a LP
 

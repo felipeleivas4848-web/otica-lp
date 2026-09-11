@@ -1,6 +1,8 @@
 /**
- * ÓTICA COM IA — recebe os envios do formulário da landing page
- * e grava uma linha na aba "Leads" da planilha, automaticamente.
+ * ÓTICA COM IA — recebe os envios da landing page e grava na planilha,
+ * automaticamente. Dois formulários usam este mesmo endpoint:
+ *   1) o formulário completo de qualificação -> aba "Leads"
+ *   2) o popup de e-mail (captura rápida)     -> aba "Emails"
  *
  * ---------------------------------------------------------------
  * INSTALAÇÃO (uma vez)
@@ -16,8 +18,8 @@
  *    "Implantar" > autorize o acesso à sua conta quando pedir.
  * 5. Copie a URL do App da Web (termina em /exec).
  * 6. Cole essa URL em  assets/script.js  na constante SHEETS_ENDPOINT.
- * 7. Teste: preencha o formulário no site. Deve aparecer uma linha nova
- *    na aba "Leads" em 1 a 2 segundos.
+ * 7. Teste: preencha o formulário e o popup no site. Deve aparecer uma
+ *    linha nova nas abas "Leads" e "Emails" em 1 a 2 segundos.
  *
  * ---------------------------------------------------------------
  * QUANDO ALTERAR ESTE SCRIPT DEPOIS
@@ -27,13 +29,17 @@
  */
 
 var SHEET_NAME = 'Leads';
+var SHEET_EMAILS = 'Emails';
 
-// Ordem das colunas na planilha. O cabeçalho é criado automaticamente.
+// Ordem das colunas na aba "Leads". O cabeçalho é criado automaticamente.
 var COLUNAS = [
   'data_hora', 'nome', 'otica', 'cidade', 'estado', 'whatsapp',
   'cargo', 'ja_investe', 'faturamento', 'investimento_mensal',
   'objetivo', 'inicio', 'origem', 'utm', 'pagina', 'enviado_em'
 ];
+
+// Ordem das colunas na aba "Emails" (popup de captura rápida).
+var COLUNAS_EMAIL = ['data_hora', 'email', 'origem', 'utm', 'pagina'];
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -47,22 +53,31 @@ function doPost(e) {
     }
 
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    var sheet = ss.getSheetByName(SHEET_NAME);
-    if (!sheet) sheet = ss.insertSheet(SHEET_NAME);
-    if (sheet.getLastRow() === 0) sheet.appendRow(COLUNAS);
 
-    var linha = COLUNAS.map(function (col) {
-      if (col === 'data_hora') return new Date();
-      return p[col] || '';
-    });
-    sheet.appendRow(linha);
+    if (p.tipo === 'popup_email') {
+      _appendRow(ss, SHEET_EMAILS, COLUNAS_EMAIL, p);
+      return _json({ ok: true });
+    }
 
+    _appendRow(ss, SHEET_NAME, COLUNAS, p);
     return _json({ ok: true });
   } catch (err) {
     return _json({ ok: false, error: String(err) });
   } finally {
     lock.releaseLock();
   }
+}
+
+function _appendRow(ss, nomeAba, colunas, p) {
+  var sheet = ss.getSheetByName(nomeAba);
+  if (!sheet) sheet = ss.insertSheet(nomeAba);
+  if (sheet.getLastRow() === 0) sheet.appendRow(colunas);
+
+  var linha = colunas.map(function (col) {
+    if (col === 'data_hora') return new Date();
+    return p[col] || '';
+  });
+  sheet.appendRow(linha);
 }
 
 // Só para testar no navegador se a implantação está de pé.

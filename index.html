@@ -712,6 +712,34 @@
   </div>
 </footer>
 
+<!-- ============ POPUP · CAPTURA DE E-MAIL ============
+     Aparece uma vez por visitante (depois de um tempo ou de rolar
+     metade da página). Grava na aba "Emails" da planilha. Se o Pixel
+     do Meta estiver instalado (fbq), também dispara Lead com o e-mail
+     (Advanced Matching) — ver assets/script.js. -->
+<div class="popup-backdrop" id="popup-backdrop" hidden>
+  <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <button class="popup__close" id="popup-close" type="button" aria-label="Fechar">✕</button>
+    <p class="eyebrow">Antes de você sair</p>
+    <h3 id="popup-title">Quer receber a condição de setembro por e-mail?</h3>
+    <p class="dim">Deixa seu e-mail que mandamos um resumo da Ótica com IA e a condição de lançamento — sem compromisso.</p>
+
+    <form class="popup__form" id="popup-form" novalidate>
+      <div class="hp" aria-hidden="true">
+        <label>Não preencha este campo <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+      </div>
+      <input type="hidden" name="tipo" value="popup_email">
+      <input type="hidden" name="origem" value="popup-email-otica-com-ia">
+      <label class="sr-only" for="popup-email">Seu e-mail</label>
+      <input type="email" id="popup-email" name="email" placeholder="seu@email.com" autocomplete="email" required>
+      <button class="btn" type="submit">Quero receber</button>
+    </form>
+    <p class="popup__status" id="popup-status" role="alert" aria-live="polite"></p>
+
+    <p class="fineprint">Ao informar seu e-mail, você concorda em receber contato sobre a Ótica com IA. Você pode se descadastrar quando quiser.</p>
+  </div>
+</div>
+
 <script src="assets/script.js"></script>
 </body>
 </html>

@@ -957,6 +957,94 @@ main > .section:first-child { border-top: 0; }
 }
 .site-footer__nav a:hover { color: var(--accent); }
 
+/* ---------------- popup de captura de e-mail ---------------- */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.popup-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(4, 6, 9, 0.72);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.popup {
+  position: relative;
+  width: 100%;
+  max-width: 26rem;
+  display: grid;
+  gap: 1em;
+  padding: clamp(1.6em, 5vw, 2.2em);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85);
+  animation: rise-in 0.35s cubic-bezier(.2, .7, .2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) { .popup { animation: none; } }
+
+.popup h3 { font-size: var(--step-1); padding-right: 1.8em; }
+
+.popup__close {
+  position: absolute;
+  top: 0.9em;
+  right: 0.9em;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color .15s ease, border-color .15s ease;
+}
+.popup__close:hover { color: var(--accent); border-color: var(--accent-line); }
+
+.popup__form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+}
+.popup__form input[type="email"] {
+  flex: 1 1 12rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85em 1em;
+}
+.popup__form input[type="email"]::placeholder { color: var(--text-mute); }
+.popup__form input[type="email"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.popup__form .btn { flex: none; }
+
+.popup__status {
+  margin: 0;
+  min-height: 1.2em;
+  font-size: var(--step--1);
+  color: var(--pos);
+}
+.popup__status[data-error] { color: var(--neg); }
+
 /* ---------------- motion / a11y ---------------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
