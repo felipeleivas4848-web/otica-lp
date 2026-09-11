@@ -31,6 +31,52 @@ if (wpp) {
   });
 }
 
+/* ---------- sombra no header ao rolar a página ---------- */
+const siteHeader = document.querySelector(".site-header");
+if (siteHeader) {
+  const onScroll = () => siteHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+}
+
+/* ---------- números da faixa "contam" ao entrar na tela ----------
+   O texto final já está no HTML (funciona sem JS); isto só troca por
+   uns instantes por uma contagem crescente até o mesmo valor. */
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const statNumbers = document.querySelectorAll(".stats__v[data-target]");
+if (statNumbers.length && !reduceMotion && "IntersectionObserver" in window) {
+  const animateCount = (el) => {
+    const target = parseFloat(el.dataset.target);
+    const prefix = el.dataset.prefix || "";
+    const suffix = el.dataset.suffix || "";
+    const finalText = el.textContent;
+    const duration = 900;
+    const start = performance.now();
+
+    function frame(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + Math.round(target * eased) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = finalText; // garante o texto/espaço exatos no final
+    }
+    requestAnimationFrame(frame);
+  };
+
+  const statsObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target);
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+  statNumbers.forEach((el) => statsObserver.observe(el));
+}
+
 /* ---------- destaque visual da opção marcada (fallback p/ :has) ---------- */
 if (form) {
   form.querySelectorAll(".opt input").forEach((inp) => {
