@@ -1,14 +1,66 @@
 /* ============================================================
    ÓTICA COM IA — landing page
-   Envio do formulário -> Google Sheets (via Apps Script Web App).
+   Envio do formulário -> N8N (Kommo CRM + Meta CAPI).
    ============================================================ */
-
-/* 1) Crie a planilha e o Apps Script (passo a passo no README.md).
-   2) Cole aqui a URL do App da Web (termina em /exec). */
-const SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycbyY5_-0vs8Q1y0WaJOzcwF3cgWOd3KUJW2AhjRwT3ckiCC0MRZ354IqCx80XDmlMR9Dng/exec"; // <-- COLE A URL AQUI
 
 /* Página para onde o visitante vai depois de enviar o formulário. */
 const PAGINA_OBRIGADO = "obrigado.html";
+
+/* Webhooks do N8N: recebem o lead e cadastram no Kommo + Meta CAPI. */
+const WEBHOOK_LEAD_PRINCIPAL = "https://n8n-n8n-start.uqrrdf.easypanel.host/webhook/95ea5f29-eaec-4304-8122-4ba50b4c0b2b";
+const WEBHOOK_NEWSLETTER = "https://n8n-n8n-start.uqrrdf.easypanel.host/webhook/3f09c1f4-f606-45dd-87b2-41c9001c9e5d";
+
+/* ---------- rastreamento: UTMs, fbclid, fbp, event_id ----------
+   Guarda UTMs/fbclid da URL de chegada em sessionStorage, pra não perder
+   se a pessoa navegar por outras páginas do site antes de preencher o
+   formulário. */
+const TRACKING_STORAGE_KEY = "oticaComIA_tracking_v1";
+function capturarTrackingDaURL() {
+  const params = new URLSearchParams(location.search);
+  const campos = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"];
+  const capturado = {};
+  let temAlgum = false;
+  campos.forEach((c) => {
+    const v = params.get(c);
+    if (v) { capturado[c] = v; temAlgum = true; }
+  });
+  if (temAlgum) {
+    try { sessionStorage.setItem(TRACKING_STORAGE_KEY, JSON.stringify(capturado)); } catch (e) {}
+  }
+}
+function getTrackingSalvo() {
+  try {
+    return JSON.parse(sessionStorage.getItem(TRACKING_STORAGE_KEY) || "{}");
+  } catch (e) { return {}; }
+}
+capturarTrackingDaURL();
+
+function getCookie(nome) {
+  const match = document.cookie.match(new RegExp("(?:^|; )" + nome + "=([^;]*)"));
+  return match ? decodeURIComponent(match[1]) : "";
+}
+function gerarEventId() {
+  if (window.crypto && typeof crypto.randomUUID === "function") return crypto.randomUUID();
+  return "evt_" + Date.now() + "_" + Math.random().toString(16).slice(2);
+}
+function adicionarDadosDeRastreamento(dados) {
+  const tracking = getTrackingSalvo();
+  dados.set("utm_source", tracking.utm_source || "");
+  dados.set("utm_medium", tracking.utm_medium || "");
+  dados.set("utm_campaign", tracking.utm_campaign || "");
+  dados.set("utm_content", tracking.utm_content || "");
+  dados.set("utm_term", tracking.utm_term || "");
+  dados.set("fbclid", tracking.fbclid || "");
+  dados.set("fbp", getCookie("_fbp"));
+  const eventId = gerarEventId();
+  dados.set("event_id", eventId);
+  return eventId;
+}
+
+/* ViewContent: dispara uma vez por carregamento de página (client-side). */
+if (typeof fbq === "function") {
+  fbq("track", "ViewContent", { content_name: document.title });
+}
 
 /* Grupos de resposta obrigatória (radios). */
 const GRUPOS_OBRIGATORIOS = [
@@ -139,20 +191,20 @@ const POPUP_STORAGE_KEY = "oticaComIA_popup_v1";
     btn.disabled = true;
     btn.textContent = "Enviando...";
 
-    const email = popupForm.querySelector("#popup-email").value.trim();
     const dados = new URLSearchParams(new FormData(popupForm));
     dados.delete("_gotcha");
     dados.set("utm", location.search.replace(/^\?/, ""));
     dados.set("pagina", location.href);
+    const eventId = adicionarDadosDeRastreamento(dados);
 
     try {
-      if (SHEETS_ENDPOINT) {
-        await fetch(SHEETS_ENDPOINT, { method: "POST", mode: "no-cors", body: dados });
-      }
-      // Meta Pixel: Advanced Matching. Só dispara se o Pixel já estiver
-      // instalado na página (função fbq definida) — ver README-LP.md.
+      // Cadastra o lead no Kommo + dispara Subscribe pro Meta CAPI (servidor).
+      await fetch(WEBHOOK_NEWSLETTER, { method: "POST", mode: "no-cors", body: dados });
+      // Meta Pixel: Advanced Matching (navegador). Só dispara se o Pixel já
+      // estiver instalado na página (função fbq definida) — ver README-LP.md.
+      // event_id igual ao mandado pro servidor -> Meta deduplica os dois.
       if (typeof fbq === "function") {
-        fbq("track", "Lead", {}, { em: email });
+        fbq("track", "Subscribe", {}, { eventID: eventId });
       }
       popupStatus.textContent = "Prontinho! Fica de olho no seu e-mail.";
       setTimeout(fecharPopup, 1600);
@@ -214,19 +266,14 @@ if (form) {
     dados.set("utm", location.search.replace(/^\?/, ""));
     dados.set("pagina", location.href);
     dados.set("enviado_em", new Date().toISOString());
+    const eventId = adicionarDadosDeRastreamento(dados);
 
     try {
-      if (SHEETS_ENDPOINT) {
-        await fetch(SHEETS_ENDPOINT, {
-          method: "POST",
-          mode: "no-cors",
-          body: dados
-        });
-      } else {
-        console.warn(
-          "[Ótica com IA] SHEETS_ENDPOINT está vazio. " +
-          "Configure a URL do Apps Script em assets/script.js. Envio simulado."
-        );
+      // Cadastra o lead no Kommo (com UTMs/fbclid/fbp) e dispara Lead pro Meta CAPI (servidor).
+      await fetch(WEBHOOK_LEAD_PRINCIPAL, { method: "POST", mode: "no-cors", body: dados });
+      // Meta Pixel (navegador) com o mesmo event_id -> Meta deduplica client x servidor.
+      if (typeof fbq === "function") {
+        fbq("track", "Lead", {}, { eventID: eventId });
       }
       // já converteu -> não precisa mais do popup de e-mail
       try { localStorage.setItem(POPUP_STORAGE_KEY, "1"); } catch (err) {}
