@@ -901,6 +901,36 @@ main > .section:first-child { border-top: 0; }
 }
 .form__error:empty { min-height: 0; }
 
+/* --- formulário em etapas (uma pergunta por vez) --- */
+.form-step[hidden] { display: none !important; }
+
+.form-progress__label {
+  font-family: var(--font-mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 0 0 0.6em;
+}
+.form-progress__track {
+  height: 4px;
+  background: var(--line-soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.form-progress__bar {
+  display: block;
+  height: 100%;
+  width: 10%;
+  background: var(--accent);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.form-nav { display: flex; gap: 0.8rem; }
+.form-nav .btn--ghost { flex: none; }
+.form-nav .btn--block { width: auto; flex: 1; }
+
 /* ---------------- página de obrigado ---------------- */
 .thanks { padding-top: clamp(56px, 10vw, 120px); }
 .thanks__mark {

@@ -229,6 +229,73 @@ if (form) {
   });
 }
 
+/* ---------- formulário em etapas: uma pergunta por vez ---------- */
+if (form) {
+  const passos = Array.from(form.querySelectorAll(".form-step"));
+  const btnVoltar = document.getElementById("btn-voltar");
+  const btnProxima = document.getElementById("btn-proxima");
+  const btnEnviar = document.getElementById("btn-enviar");
+  const progressoAtual = document.getElementById("form-progress-atual");
+  const progressoBarra = document.getElementById("form-progress-bar");
+  let passoAtual = 0;
+
+  document.getElementById("form-progress-total").textContent = passos.length;
+
+  function validarPasso(passo) {
+    const campos = passo.querySelectorAll("input, select");
+    for (const campo of campos) {
+      if (!campo.checkValidity()) {
+        campo.reportValidity();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function irParaPasso(indice) {
+    passos[passoAtual].hidden = true;
+    passoAtual = Math.max(0, Math.min(indice, passos.length - 1));
+    passos[passoAtual].hidden = false;
+    statusEl.textContent = "";
+
+    progressoAtual.textContent = passoAtual + 1;
+    progressoBarra.style.width = `${((passoAtual + 1) / passos.length) * 100}%`;
+
+    btnVoltar.hidden = passoAtual === 0;
+    const ultimoPasso = passoAtual === passos.length - 1;
+    btnProxima.hidden = ultimoPasso;
+    btnEnviar.hidden = !ultimoPasso;
+
+    passos[passoAtual].scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  btnProxima.addEventListener("click", () => {
+    if (!validarPasso(passos[passoAtual])) return;
+    irParaPasso(passoAtual + 1);
+  });
+  btnVoltar.addEventListener("click", () => irParaPasso(passoAtual - 1));
+
+  // avança sozinho ao escolher uma opção (exceto na última pergunta)
+  passos.forEach((passo, indice) => {
+    passo.querySelectorAll('input[type="radio"]').forEach((radio) => {
+      radio.addEventListener("change", () => {
+        if (indice === passos.length - 1) return;
+        setTimeout(() => irParaPasso(indice + 1), 350);
+      });
+    });
+  });
+
+  // Enter em campo de texto avança em vez de tentar enviar o formulário
+  form.addEventListener("keydown", (e) => {
+    if (e.key !== "Enter") return;
+    const tag = e.target.tagName;
+    if (tag !== "INPUT" && tag !== "SELECT") return;
+    if (passoAtual === passos.length - 1) return;
+    e.preventDefault();
+    btnProxima.click();
+  });
+}
+
 /* ---------- envio ---------- */
 if (form) {
   form.addEventListener("submit", async (e) => {

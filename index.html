@@ -610,17 +610,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <input type="hidden" name="origem" value="landing-page-otica-com-ia">
 
-            <div class="field">
+            <div class="form-progress">
+              <p class="form-progress__label">Pergunta <span id="form-progress-atual">1</span> de <span id="form-progress-total">10</span></p>
+              <div class="form-progress__track"><span class="form-progress__bar" id="form-progress-bar"></span></div>
+            </div>
+
+            <div class="field form-step">
               <label for="nome">Qual seu nome?</label>
               <input type="text" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="name" required>
             </div>
 
-            <div class="field">
+            <div class="field form-step" hidden>
               <label for="otica">Qual o nome da sua ótica?</label>
               <input type="text" id="otica" name="otica" placeholder="Nome da ótica" required>
             </div>
 
-            <div class="field">
+            <div class="field form-step" hidden>
               <span class="field__label">Onde fica sua ótica?</span>
               <div class="row2">
                 <input type="text" id="cidade" name="cidade" placeholder="Cidade" aria-label="Cidade" autocomplete="address-level2" required>
@@ -636,34 +641,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </div>
 
-            <div class="field">
+            <div class="field form-step" hidden>
               <label for="whatsapp">Qual seu WhatsApp?</label>
               <input type="tel" id="whatsapp" name="whatsapp" inputmode="numeric" placeholder="(00) 00000-0000" autocomplete="tel" required>
             </div>
 
-            <fieldset class="field">
+            <fieldset class="field form-step" hidden>
               <legend>Você é:</legend>
               <div class="opts">
-                <label class="opt"><input type="radio" name="cargo" value="Proprietário(a)"> Proprietário(a)</label>
+                <label class="opt"><input type="radio" name="cargo" value="Proprietário(a)" required> Proprietário(a)</label>
                 <label class="opt"><input type="radio" name="cargo" value="Sócio(a)"> Sócio(a)</label>
                 <label class="opt"><input type="radio" name="cargo" value="Gestor(a)/responsável"> Gestor(a)/responsável</label>
                 <label class="opt"><input type="radio" name="cargo" value="Outro"> Outro</label>
               </div>
             </fieldset>
 
-            <fieldset class="field">
+            <fieldset class="field form-step" hidden>
               <legend>Sua ótica já investe em anúncios?</legend>
               <div class="opts">
-                <label class="opt"><input type="radio" name="ja_investe" value="Sim, atualmente"> Sim, atualmente</label>
+                <label class="opt"><input type="radio" name="ja_investe" value="Sim, atualmente" required> Sim, atualmente</label>
                 <label class="opt"><input type="radio" name="ja_investe" value="Já investi anteriormente"> Já investi anteriormente</label>
                 <label class="opt"><input type="radio" name="ja_investe" value="Nunca investi"> Nunca investi</label>
               </div>
             </fieldset>
 
-            <fieldset class="field">
+            <fieldset class="field form-step" hidden>
               <legend>Qual o faturamento médio mensal da sua ótica?</legend>
               <div class="opts">
-                <label class="opt"><input type="radio" name="faturamento" value="Menos de R$5 mil"> Menos de R$5 mil</label>
+                <label class="opt"><input type="radio" name="faturamento" value="Menos de R$5 mil" required> Menos de R$5 mil</label>
                 <label class="opt"><input type="radio" name="faturamento" value="De R$5 mil a R$10 mil"> De R$5 mil a R$10 mil</label>
                 <label class="opt"><input type="radio" name="faturamento" value="De R$10 mil a R$15 mil"> De R$10 mil a R$15 mil</label>
                 <label class="opt"><input type="radio" name="faturamento" value="De R$15 mil a R$20 mil"> De R$15 mil a R$20 mil</label>
@@ -673,20 +678,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </fieldset>
 
-            <fieldset class="field">
+            <fieldset class="field form-step" hidden>
               <legend>Quanto você consegue investir mensalmente em anúncios?</legend>
               <div class="opts">
-                <label class="opt"><input type="radio" name="investimento_mensal" value="Até R$500"> Até R$500</label>
+                <label class="opt"><input type="radio" name="investimento_mensal" value="Até R$500" required> Até R$500</label>
                 <label class="opt"><input type="radio" name="investimento_mensal" value="R$500 a R$1.000"> R$500 a R$1.000</label>
                 <label class="opt"><input type="radio" name="investimento_mensal" value="R$1.000 a R$2.000"> R$1.000 a R$2.000</label>
                 <label class="opt"><input type="radio" name="investimento_mensal" value="Acima de R$2.000"> Acima de R$2.000</label>
               </div>
             </fieldset>
 
-            <fieldset class="field">
+            <fieldset class="field form-step" hidden>
               <legend>Qual é seu principal objetivo?</legend>
               <div class="opts">
-                <label class="opt"><input type="radio" name="objetivo" value="Atrair mais clientes"> Atrair mais clientes</label>
+                <label class="opt"><input type="radio" name="objetivo" value="Atrair mais clientes" required> Atrair mais clientes</label>
                 <label class="opt"><input type="radio" name="objetivo" value="Vender mais lentes multifocais"> Vender mais lentes multifocais</label>
                 <label class="opt"><input type="radio" name="objetivo" value="Aumentar o ticket médio"> Aumentar o ticket médio</label>
                 <label class="opt"><input type="radio" name="objetivo" value="Gerar mais conversas no WhatsApp"> Gerar mais conversas no WhatsApp</label>
@@ -695,10 +700,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </fieldset>
 
-            <fieldset class="field">
+            <fieldset class="field form-step" hidden>
               <legend>Quando pretende começar?</legend>
               <div class="opts">
-                <label class="opt"><input type="radio" name="inicio" value="Quero começar agora"> Quero começar agora</label>
+                <label class="opt"><input type="radio" name="inicio" value="Quero começar agora" required> Quero começar agora</label>
                 <label class="opt"><input type="radio" name="inicio" value="Nos próximos 30 dias"> Nos próximos 30 dias</label>
                 <label class="opt"><input type="radio" name="inicio" value="Nos próximos 3 meses"> Nos próximos 3 meses</label>
                 <label class="opt"><input type="radio" name="inicio" value="Estou apenas pesquisando"> Estou apenas pesquisando</label>
@@ -706,7 +711,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </fieldset>
 
             <p class="form__error" id="form-status" role="alert" aria-live="polite"></p>
-            <button class="btn btn--lg btn--block" type="submit">Quero receber uma análise da minha ótica</button>
+            <div class="form-nav">
+              <button class="btn btn--sm btn--ghost" type="button" id="btn-voltar" hidden>Voltar</button>
+              <button class="btn btn--lg btn--block" type="button" id="btn-proxima">Próxima pergunta</button>
+              <button class="btn btn--lg btn--block" type="submit" id="btn-enviar" hidden>Quero receber uma análise da minha ótica</button>
+            </div>
             <p class="fineprint">🔒 Seus dados serão utilizados para análise da solicitação e contato comercial.</p>
           </form>
         </div>
