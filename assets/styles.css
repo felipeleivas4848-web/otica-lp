@@ -595,7 +595,6 @@ main > .section:first-child { border-top: 0; }
 
 /* variação em grade: economiza altura quando há espaço horizontal (ex: Método LENS) */
 .steps--grid {
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   gap: 1px;
   background: var(--line-soft);
   border: 1px solid var(--line-soft);
@@ -605,9 +604,12 @@ main > .section:first-child { border-top: 0; }
 .steps--grid .step {
   background: var(--ink);
   border-top: 0;
-  padding: 1.5em 1.4em;
+  padding: 1.2em 1.3em;
   grid-template-columns: auto 1fr;
   align-content: start;
+}
+@media (min-width: 720px) {
+  .steps--grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 /* ---------------- cases (sec 08) ---------------- */
