@@ -112,7 +112,7 @@ a { color: inherit; }
 }
 
 .section {
-  padding-block: clamp(56px, 7.5vw, 104px);
+  padding-block: clamp(48px, 6.5vw, 84px);
   border-top: 1px solid var(--line-soft);
   scroll-margin-top: calc(var(--header-h) + 16px);
 }
@@ -132,6 +132,7 @@ main > .section:first-child { border-top: 0; }
 .section-head { max-width: var(--measure); }
 .section-body { max-width: var(--measure); }
 .section__inner--wide .section-body { max-width: none; }
+.measure { max-width: var(--measure); }
 .section__inner--wide .section-body > .fineprint { max-width: var(--measure); }
 
 /* --- cabeçalho: eyebrow / badge -> h2 -> lede --- */
@@ -418,6 +419,7 @@ main > .section:first-child { border-top: 0; }
   gap: 0.6em;
 }
 .tick-list li, .q-list li { padding-left: 1.1em; position: relative; }
+.tick-list--row { grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); gap: 0.6em 1.4em; }
 .tick-list li::before {
   content: "";
   position: absolute;
@@ -590,6 +592,23 @@ main > .section:first-child { border-top: 0; }
   font-variant-numeric: tabular-nums;
 }
 .step h3 { margin-bottom: 0.2em; }
+
+/* variação em grade: economiza altura quando há espaço horizontal (ex: Método LENS) */
+.steps--grid {
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1px;
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.steps--grid .step {
+  background: var(--ink);
+  border-top: 0;
+  padding: 1.5em 1.4em;
+  grid-template-columns: auto 1fr;
+  align-content: start;
+}
 
 /* ---------------- cases (sec 08) ---------------- */
 .cases {
