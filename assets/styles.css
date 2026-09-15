@@ -613,6 +613,9 @@ main > .section:first-child { border-top: 0; }
 }
 @media (min-width: 720px) {
   .steps--grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* 5 passos em 3 colunas: o último ocupa as 2 colunas finais da
+     segunda fileira, em vez de deixar uma caixa vazia */
+  .steps--grid .step:last-child { grid-column: span 2; }
 }
 
 /* ---------------- cases (sec 08) ---------------- */
