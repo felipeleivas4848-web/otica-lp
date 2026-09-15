@@ -143,10 +143,13 @@ main > .section:first-child { border-top: 0; }
 /* --- salto do cabeçalho para o corpo --- */
 .section-head + .section-body { margin-top: var(--space-l); }
 
-/* --- corpo: ritmo padrão entre blocos --- */
-.section-body > * + *               { margin-top: var(--space-m); }
-.section-body > p + p               { margin-top: var(--space-s); }
-.section-body > .h-kicker + *       { margin-top: var(--space-xs); }
+/* --- corpo: ritmo padrão entre blocos (também dentro de .measure) --- */
+.section-body > * + *,
+.measure > * + *                    { margin-top: var(--space-m); }
+.section-body > p + p,
+.measure > p + p                    { margin-top: var(--space-s); }
+.section-body > .h-kicker + *,
+.measure > .h-kicker + *            { margin-top: var(--space-xs); }
 .section-body > * + .fineprint      { margin-top: var(--space-s); }
 .section-body > * + .cta-row        { margin-top: var(--space-l); }
 .section-body > * + .big-statement,
