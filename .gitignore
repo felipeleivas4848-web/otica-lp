@@ -19,3 +19,7 @@ Thumbs.db
 # logs
 *.log
 npm-debug.log*
+
+# cadência: contém o path secreto do webhook de eventos
+integracoes/cadencia/workflows.json
+integracoes/cadencia/dist/
