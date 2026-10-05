@@ -441,7 +441,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <input type="hidden" name="produto" value="Agendamento com IA">
 
             <div class="form-progress">
-              <p class="form-progress__label">Pergunta <span id="form-progress-atual">1</span> de <span id="form-progress-total">12</span></p>
+              <p class="form-progress__label">Pergunta <span id="form-progress-atual">1</span> de <span id="form-progress-total">13</span></p>
               <div class="form-progress__track"><span class="form-progress__bar" id="form-progress-bar"></span></div>
             </div>
 
@@ -472,8 +472,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="field form-step" hidden>
-              <label for="whatsapp">Qual seu WhatsApp?</label>
+              <label for="instagram">Qual o @ do Instagram da sua ótica?</label>
+              <input type="text" id="instagram" name="instagram" placeholder="@suaotica" autocomplete="off" autocapitalize="none" spellcheck="false" required>
+            </div>
+
+            <div class="field form-step" hidden>
+              <span class="field__label">Quais números podemos usar para falar com você?</span>
+              <label for="whatsapp" class="dim">Seu WhatsApp</label>
               <input type="tel" id="whatsapp" name="whatsapp" inputmode="numeric" placeholder="(00) 00000-0000" autocomplete="tel" required>
+              <label for="telefone_comercial" class="dim" style="margin-top: var(--space-xs)">Telefone ou WhatsApp comercial da ótica</label>
+              <input type="tel" id="telefone_comercial" name="telefone_comercial" inputmode="numeric" placeholder="(00) 0000-0000" required>
             </div>
 
             <fieldset class="field form-step" hidden>
@@ -669,6 +677,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script src="../assets/script.js"></script>
 <script>
+  // Instagram: sempre com @ na frente, sem espaços.
+  (function () {
+    var ig = document.getElementById("instagram");
+    if (!ig) return;
+    ig.addEventListener("blur", function () {
+      var v = ig.value.trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i, "").replace(/[\/?].*$/, "").replace(/\s+/g, "").replace(/^@+/, "");
+      ig.value = v ? "@" + v : "";
+    });
+  })();
+  // Telefone comercial: fixo (00) 0000-0000 ou celular (00) 00000-0000.
+  (function () {
+    var t = document.getElementById("telefone_comercial");
+    if (!t) return;
+    t.addEventListener("input", function () {
+      var v = t.value.replace(/\D/g, "").slice(0, 11);
+      if (v.length > 10)     v = "(" + v.slice(0, 2) + ") " + v.slice(2, 7) + "-" + v.slice(7);
+      else if (v.length > 6) v = "(" + v.slice(0, 2) + ") " + v.slice(2, 6) + "-" + v.slice(6);
+      else if (v.length > 2) v = "(" + v.slice(0, 2) + ") " + v.slice(2);
+      else if (v.length > 0) v = "(" + v;
+      t.value = v;
+    });
+  })();
   (function () {
     var f = document.getElementById("formulario");
     if (!f || !("IntersectionObserver" in window)) { document.body.classList.add("form-na-tela"); return; }
