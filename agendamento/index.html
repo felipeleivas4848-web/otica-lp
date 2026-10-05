@@ -77,6 +77,10 @@ src="https://www.facebook.com/tr?id=1718677262582293&ev=PageView&noscript=1"
   }
   .price-model { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem .7rem; font-family: var(--font-display); font-weight: 800; font-size: var(--step-3); line-height: 1.15; }
   .price-model .plus { color: var(--accent); }
+  /* topo mais largo: headline e subtítulo em no máximo 3 linhas no computador */
+  .hero__inner { max-width: 68rem; }
+  .hero h1 { max-width: 30ch; }
+  .hero__sub { max-width: 64ch; }
   /* no celular, o botão fixo do formulário só aparece quando o formulário está na tela */
   @media (max-width: 640px) { body:not(.form-na-tela) .form-nav { display: none; } }
 </style>
@@ -117,7 +121,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="hero__inner">
         <p class="badge">Agendamento com IA &nbsp;•&nbsp; Para óticas com exame de vista</p>
         <h1 id="hero-title">Sua ótica está <span class="accent">perdendo exames de vista</span> porque ninguém responde, confirma e remarca a tempo.</h1>
-        <p class="hero__sub dim">Paciente sem resposta marca no concorrente. Paciente sem lembrete falta. Paciente que pediu para remarcar some. Com o Agendamento com IA, a Inteligência Artificial agenda, confirma e remarca sozinha pelo WhatsApp, 24 horas por dia, sem recepcionista.</p>
+        <p class="hero__sub dim">Paciente sem resposta marca no concorrente. Paciente sem lembrete falta. A IA agenda, confirma e remarca sozinha pelo WhatsApp, 24h por dia, sem recepcionista.</p>
 
         <ul class="checklist checklist--pos checklist--2col hero__checks">
           <li>Resposta na hora, 24h por dia</li>
