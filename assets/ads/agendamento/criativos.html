@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Criativos · Agendamento com IA</title>
+<!-- Fonte dos 4 criativos de feed (1080x1350). Cada um: criativos.html?v=1..4
+     Gerar PNG: chrome --headless=new --window-size=1080,1350 --screenshot=AG0X.png "file:///.../criativos.html?v=X" -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --ink: #090C10; --surface: #10161D; --surface-2: #161F29; --line: #29343F;
+    --text: #E7EDF3; --dim: #9BA8B4; --mute: #67727E;
+    --accent: #2F6FED; --accent-2: #4F8BFF; --neg: #ED6A80; --pos: #4BD98D;
+    --wa-bg: #0B141A; --wa-in: #202C33; --wa-out: #005C4B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1080px; height: 1350px; overflow: hidden; background: var(--ink); }
+  body { font-family: "IBM Plex Sans", "Segoe UI", sans-serif; color: var(--text); }
+  .ad {
+    position: relative; width: 1080px; height: 1350px; padding: 72px 76px 64px;
+    display: flex; flex-direction: column;
+    background:
+      radial-gradient(900px 600px at 85% 8%, rgba(47,111,237,.20), transparent 60%),
+      radial-gradient(700px 500px at 0% 100%, rgba(237,106,128,.10), transparent 60%),
+      var(--ink);
+  }
+  .ad::after { /* grão sutil */
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .05;
+    background-image: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 3px);
+  }
+  .ad[hidden] { display: none; }
+
+  /* topo: marca */
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand svg { width: 40px; height: 40px; color: var(--accent-2); }
+  .brand b { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 30px; letter-spacing: .02em; }
+  .brand b span { color: var(--accent-2); }
+  .tag {
+    margin-left: auto; font-family: "IBM Plex Mono", monospace; font-size: 20px; letter-spacing: .12em;
+    color: var(--accent-2); border: 1.5px solid rgba(79,139,255,.45); border-radius: 999px; padding: 9px 18px;
+  }
+
+  /* headline */
+  .head { margin-top: 44px; }
+  .kicker { font-family: "IBM Plex Mono", monospace; font-size: 22px; letter-spacing: .14em; color: var(--neg); text-transform: uppercase; }
+  h1 {
+    margin-top: 18px; font-family: "Archivo", sans-serif; font-weight: 900; font-size: 68px; line-height: 1.05;
+    letter-spacing: -0.025em; max-width: 920px;
+  }
+  h1 .a { color: var(--accent-2); }
+  h1 .n { color: var(--neg); }
+
+  /* área visual */
+  .visual { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; margin: 28px 0 26px; }
+
+  /* rodapé */
+  .foot {
+    display: flex; align-items: center; gap: 26px; padding-top: 30px; border-top: 1.5px solid var(--line);
+  }
+  .foot__name { font-family: "Archivo", sans-serif; font-weight: 800; font-size: 34px; line-height: 1.05; }
+  .foot__name span { color: var(--accent-2); }
+  .foot__sep { width: 1.5px; align-self: stretch; background: var(--line); }
+  .foot__txt { font-size: 24px; line-height: 1.35; color: var(--dim); }
+  .foot__txt b { color: var(--text); font-weight: 600; }
+  .cta {
+    margin-left: auto; white-space: nowrap; font-family: "Archivo", sans-serif; font-weight: 800; font-size: 26px;
+    background: var(--accent); color: #fff; padding: 20px 28px; border-radius: 12px;
+  }
+
+  /* ---------- WhatsApp ---------- */
+  .wa {
+    width: 760px; background: var(--wa-bg); border: 1.5px solid #1f2c34; border-radius: 28px; overflow: hidden;
+    box-shadow: 0 40px 90px rgba(0,0,0,.55);
+  }
+  .wa__bar { display: flex; align-items: center; gap: 16px; padding: 16px 24px; background: #1F2C33; }
+  .wa__av { width: 54px; height: 54px; border-radius: 50%; background: #3b4a54; display: grid; place-items: center; font-weight: 700; font-size: 24px; color: #cfd8dc; }
+  .wa__name { font-weight: 600; font-size: 27px; }
+  .wa__st { font-size: 20px; color: #8696a0; }
+  .wa__body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .bub { max-width: 80%; padding: 11px 16px 8px; border-radius: 14px; font-size: 25px; line-height: 1.32; }
+  .bub--in { align-self: flex-start; background: var(--wa-in); border-top-left-radius: 4px; }
+  .bub--out { align-self: flex-end; background: var(--wa-out); border-top-right-radius: 4px; }
+  .bub i { display: block; text-align: right; font-style: normal; font-size: 18px; color: #8696a0; margin-top: 4px; }
+  .day { align-self: center; font-size: 19px; color: #8696a0; background: #182229; padding: 6px 14px; border-radius: 8px; }
+  .noreply {
+    align-self: center; margin-top: 8px; font-family: "IBM Plex Mono", monospace; font-size: 21px; letter-spacing: .06em;
+    color: var(--neg); border: 1.5px dashed rgba(237,106,128,.55); border-radius: 10px; padding: 10px 18px;
+  }
+
+  /* v2: notificações */
+  .stack { width: 820px; display: flex; flex-direction: column; gap: 16px; }
+  .notif {
+    display: flex; align-items: center; gap: 18px; padding: 15px 22px; border-radius: 20px;
+    background: rgba(22,31,41,.92); border: 1.5px solid var(--line);
+  }
+  .notif__ic { width: 52px; height: 52px; border-radius: 14px; background: #25D366; display: grid; place-items: center; flex: none; }
+  .notif__ic svg { width: 30px; height: 30px; color: #fff; }
+  .notif__t { flex: 1; min-width: 0; }
+  .notif__t b { display: block; font-size: 24px; }
+  .notif__t span { display: block; font-size: 23px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .notif__h { font-size: 20px; color: var(--mute); font-family: "IBM Plex Mono", monospace; }
+  .notif--fade { opacity: .55; } .notif--fade2 { opacity: .3; }
+  .counter {
+    align-self: center; margin-top: 14px; font-family: "Archivo", sans-serif; font-weight: 900; font-size: 30px; color: var(--neg);
+  }
+
+  /* v3: duas conversas */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 928px; }
+  .duo .wa { width: auto; }
+  .duo .bub { font-size: 23px; max-width: 92%; }
+  .duo .wa__name { font-size: 23px; }
+  .label { font-family: "IBM Plex Mono", monospace; font-size: 20px; letter-spacing: .1em; text-align: center; padding: 12px; }
+  .label--neg { color: var(--neg); } .label--pos { color: var(--pos); }
+  .ok { align-self: flex-end; font-size: 22px; color: var(--pos); font-weight: 600; }
+
+  /* v4: agenda */
+  .agenda { width: 840px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 24px; padding: 28px 30px; box-shadow: 0 40px 90px rgba(0,0,0,.5); }
+  .agenda__h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px; }
+  .agenda__h b { font-family: "Archivo", sans-serif; font-size: 30px; }
+  .agenda__h span { font-family: "IBM Plex Mono", monospace; font-size: 20px; color: var(--mute); }
+  .slot { display: flex; align-items: center; gap: 20px; padding: 12px 18px; border-radius: 14px; border: 1.5px solid var(--line); margin-top: 10px; }
+  .slot__h { font-family: "IBM Plex Mono", monospace; font-size: 24px; color: var(--dim); width: 86px; }
+  .slot__n { flex: 1; font-size: 25px; }
+  .st { font-family: "IBM Plex Mono", monospace; font-size: 19px; letter-spacing: .06em; padding: 7px 12px; border-radius: 8px; }
+  .st--neg { color: var(--neg); background: rgba(237,106,128,.12); border: 1px solid rgba(237,106,128,.4); }
+  .st--pos { color: var(--pos); background: rgba(75,217,141,.10); border: 1px solid rgba(75,217,141,.35); }
+  .slot--neg { border-color: rgba(237,106,128,.45); background: rgba(237,106,128,.05); }
+  .slot--neg .slot__n { color: var(--mute); text-decoration: line-through; }
+  .loss { margin-top: 20px; text-align: right; font-family: "Archivo", sans-serif; font-weight: 800; font-size: 28px; color: var(--neg); }
+</style>
+</head>
+<body>
+
+<!-- ===== AG01 · "perdendo exames por falta de resposta" (LP ?h=1) ===== -->
+<section class="ad" data-v="1" hidden>
+  <header class="brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M6.5 9.5A6.5 6.5 0 0 1 12 6.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg>
+    <b>ÓTICA com <span>IA</span></b>
+    <span class="tag">AGENDAMENTO COM IA</span>
+  </header>
+  <div class="head">
+    <p class="kicker">Para donos de ótica com exame de vista</p>
+    <h1>Sua ótica está <span class="a">perdendo exames de vista</span> por falta de resposta.</h1>
+  </div>
+  <div class="visual">
+    <div class="wa">
+      <div class="wa__bar"><span class="wa__av">M</span><div><p class="wa__name">Mariana</p><p class="wa__st">visto por último às 22:14</p></div></div>
+      <div class="wa__body">
+        <span class="day">ONTEM</span>
+        <div class="bub bub--in">Oi! Vocês fazem exame de vista? Tem horário pra amanhã cedo?<i>22:14</i></div>
+                <span class="day">HOJE</span>
+        <div class="bub bub--out">Bom dia, Mariana! Temos sim, que horas fica bom?<i>09:32 ✓✓</i></div>
+        <div class="bub bub--in">Ah, já marquei em outra ótica. Obrigada!<i>09:40</i></div>
+        <span class="noreply">EXAME PERDIDO · VENDA PERDIDA</span>
+      </div>
+    </div>
+  </div>
+  <footer class="foot">
+    <p class="foot__name">Agendamento<br><span>com IA</span></p>
+    <span class="foot__sep"></span>
+    <p class="foot__txt">A IA responde na hora,<br><b>agenda e confirma sozinha. 24h.</b></p>
+    <span class="cta">Saiba mais</span>
+  </footer>
+</section>
+
+<!-- ===== AG02 · "quantos exames perdeu sem resposta" (LP ?h=2) ===== -->
+<section class="ad" data-v="2" hidden>
+  <header class="brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M6.5 9.5A6.5 6.5 0 0 1 12 6.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg>
+    <b>ÓTICA com <span>IA</span></b>
+    <span class="tag">AGENDAMENTO COM IA</span>
+  </header>
+  <div class="head">
+    <p class="kicker">Faça a conta da sua ótica</p>
+    <h1>Quantos exames sua ótica perdeu <span class="a">sem resposta no WhatsApp?</span></h1>
+  </div>
+  <div class="visual">
+    <div class="stack">
+      <div class="notif"><span class="notif__ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></span><div class="notif__t"><b>Carlos</b><span>Quanto custa o exame de vista?</span></div><span class="notif__h">21:08</span></div>
+      <div class="notif"><span class="notif__ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></span><div class="notif__t"><b>Patrícia</b><span>Tem horário sábado pra minha filha?</span></div><span class="notif__h">22:30</span></div>
+      <div class="notif"><span class="notif__ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></span><div class="notif__t"><b>João</b><span>Preciso remarcar meu exame de amanhã</span></div><span class="notif__h">23:12</span></div>
+      <div class="notif notif--fade"><span class="notif__ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></span><div class="notif__t"><b>Ana</b><span>Vi o anúncio, como faço pra agendar?</span></div><span class="notif__h">07:02</span></div>
+      <div class="notif notif--fade2"><span class="notif__ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2z"/></svg></span><div class="notif__t"><b>Roberto</b><span>Oi? Alguém aí?</span></div><span class="notif__h">07:45</span></div>
+      <p class="counter">5 pacientes esperando. Nenhuma resposta.</p>
+    </div>
+  </div>
+  <footer class="foot">
+    <p class="foot__name">Agendamento<br><span>com IA</span></p>
+    <span class="foot__sep"></span>
+    <p class="foot__txt">Nenhuma mensagem sem resposta.<br><b>A IA agenda sozinha, 24h.</b></p>
+    <span class="cta">Saiba mais</span>
+  </footer>
+</section>
+
+<!-- ===== AG03 · "paciente sem resposta marca no concorrente" (LP ?h=3) ===== -->
+<section class="ad" data-v="3" hidden>
+  <header class="brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M6.5 9.5A6.5 6.5 0 0 1 12 6.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg>
+    <b>ÓTICA com <span>IA</span></b>
+    <span class="tag">AGENDAMENTO COM IA</span>
+  </header>
+  <div class="head">
+    <p class="kicker">A mesma pergunta, às 22h</p>
+    <h1>Paciente sem resposta na hora <span class="n">marca o exame no concorrente.</span></h1>
+  </div>
+  <div class="visual">
+    <div class="duo">
+      <div>
+        <div class="wa">
+          <div class="wa__bar"><span class="wa__av">S</span><div><p class="wa__name">Sua ótica</p><p class="wa__st">fechado</p></div></div>
+          <div class="wa__body">
+            <div class="bub bub--out">Tem horário pra exame de vista amanhã?<i>22:03 ✓</i></div>
+            <div class="bub bub--out">?<i>22:30 ✓</i></div>
+            <span class="noreply" style="font-size:18px">SEM RESPOSTA</span>
+          </div>
+        </div>
+        <p class="label label--neg">✕ PACIENTE PERDIDO</p>
+      </div>
+      <div>
+        <div class="wa">
+          <div class="wa__bar"><span class="wa__av">C</span><div><p class="wa__name">Concorrente</p><p class="wa__st">online</p></div></div>
+          <div class="wa__body">
+            <div class="bub bub--out">Tem horário pra exame de vista amanhã?<i>22:05 ✓✓</i></div>
+            <div class="bub bub--in">Temos sim! 9h ou 10h30?<i>22:05</i></div>
+            <div class="bub bub--out">9h!<i>22:06 ✓✓</i></div>
+            <span class="ok">✓ Agendado</span>
+          </div>
+        </div>
+        <p class="label label--pos">✓ VENDA DO CONCORRENTE</p>
+      </div>
+    </div>
+  </div>
+  <footer class="foot">
+    <p class="foot__name">Agendamento<br><span>com IA</span></p>
+    <span class="foot__sep"></span>
+    <p class="foot__txt">Sua ótica responde primeiro.<br><b>A IA agenda na hora, 24h.</b></p>
+    <span class="cta">Saiba mais</span>
+  </footer>
+</section>
+
+<!-- ===== AG04 · "cada paciente que falta é um óculos a menos" (LP ?h=4) ===== -->
+<section class="ad" data-v="4" hidden>
+  <header class="brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M6.5 9.5A6.5 6.5 0 0 1 12 6.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/></svg>
+    <b>ÓTICA com <span>IA</span></b>
+    <span class="tag">AGENDAMENTO COM IA</span>
+  </header>
+  <div class="head">
+    <p class="kicker">Cadeira do exame vazia</p>
+    <h1>Cada paciente que falta é <span class="n">um óculos que sua ótica deixou de vender.</span></h1>
+  </div>
+  <div class="visual">
+    <div class="agenda">
+      <div class="agenda__h"><b>Agenda de exames · Sábado</b><span>sem confirmação</span></div>
+      <div class="slot"><span class="slot__h">09:00</span><span class="slot__n">Fernanda Lima</span><span class="st st--pos">VEIO</span></div>
+      <div class="slot slot--neg"><span class="slot__h">09:30</span><span class="slot__n">Ricardo Souza</span><span class="st st--neg">FALTOU</span></div>
+      <div class="slot"><span class="slot__h">10:00</span><span class="slot__n">Juliana Alves</span><span class="st st--pos">VEIO</span></div>
+      <div class="slot slot--neg"><span class="slot__h">10:30</span><span class="slot__n">Marcos Pereira</span><span class="st st--neg">FALTOU</span></div>
+      <div class="slot slot--neg"><span class="slot__h">11:00</span><span class="slot__n">Beatriz Rocha</span><span class="st st--neg">FALTOU</span></div>
+      <p class="loss">3 exames perdidos = 3 óculos a menos</p>
+    </div>
+  </div>
+  <footer class="foot">
+    <p class="foot__name">Agendamento<br><span>com IA</span></p>
+    <span class="foot__sep"></span>
+    <p class="foot__txt">A IA confirma 3 vezes e remarca<br><b>quem não pode ir. Sozinha.</b></p>
+    <span class="cta">Saiba mais</span>
+  </footer>
+</section>
+
+<script>
+  var v = new URLSearchParams(location.search).get('v') || '1';
+  document.querySelector('.ad[data-v="' + v + '"]').hidden = false;
+</script>
+</body>
+</html>
