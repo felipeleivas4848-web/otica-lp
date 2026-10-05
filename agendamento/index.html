@@ -690,6 +690,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </footer>
 
+<script>
+  // Headline por link (?h=1 a ?h=4): para comparar versões e para cada anúncio abrir com a frase dele.
+  (function () {
+    var H = {
+      2: 'Quantos exames de vista sua ótica perdeu este mês <span class=\"accent\">por falta de alguém para responder o WhatsApp?</span>',
+      3: 'Paciente que não é respondido na hora <span class=\"accent\">marca o exame no concorrente.</span>',
+      4: 'Cada paciente que falta ou desiste do exame é <span class=\"accent\">uma venda de óculos que sua ótica perdeu.</span>'
+    };
+    var h = new URLSearchParams(location.search).get('h');
+    var el = document.getElementById('hero-title');
+    if (el && H[h]) el.innerHTML = H[h];
+  })();
+</script>
 <script src="../assets/script.js"></script>
 <script>
   // Instagram: sempre com @ na frente, sem espaços.
