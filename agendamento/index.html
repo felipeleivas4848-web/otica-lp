@@ -81,6 +81,15 @@ src="https://www.facebook.com/tr?id=1718677262582293&ev=PageView&noscript=1"
   .hero__inner { max-width: 68rem; }
   .hero h1 { max-width: 30ch; }
   .hero__sub { max-width: 64ch; }
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.8rem; }
+    main h2 { font-size: 1.45rem; }
+    main .big-statement { font-size: 1.3rem; }
+  }
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 1.6rem; }
+    main h2 { font-size: 1.35rem; }
+  }
   /* no celular, o botão fixo do formulário só aparece quando o formulário está na tela */
   @media (max-width: 640px) { body:not(.form-na-tela) .form-nav { display: none; } }
 </style>
@@ -120,8 +129,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="wrap">
       <div class="hero__inner">
         <p class="badge">Agendamento com IA &nbsp;•&nbsp; Para óticas com exame de vista</p>
-        <h1 id="hero-title">Sua ótica está <span class="accent">perdendo exames de vista</span> porque ninguém responde, confirma e remarca a tempo.</h1>
-        <p class="hero__sub dim">Paciente sem resposta marca no concorrente. Paciente sem lembrete falta. A IA agenda, confirma e remarca sozinha pelo WhatsApp, 24h por dia, sem recepcionista.</p>
+        <h1 id="hero-title">Sua ótica está <span class="accent">perdendo exames de vista</span> por falta de resposta.</h1>
+        <p class="hero__sub dim">Sem resposta, o paciente vai ao concorrente. Sem lembrete, falta. A IA agenda, confirma e remarca sozinha, 24h.</p>
 
         <ul class="checklist checklist--pos checklist--2col hero__checks">
           <li>Resposta na hora, 24h por dia</li>
@@ -145,7 +154,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="section__inner">
         <div class="section-head">
           <p class="eyebrow">Isso acontece na sua ótica?</p>
-          <h2 id="s2-title">Todo dia, pacientes que queriam fazer o exame de vista escapam da sua agenda. E quase sempre ninguém percebe.</h2>
+          <h2 id="s2-title">Todo dia, pacientes escapam da sua agenda de exames. E ninguém percebe.</h2>
         </div>
         <div class="section-body">
           <ul class="q-list">
@@ -156,7 +165,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>No sábado de movimento, o vendedor larga o cliente do balcão para responder WhatsApp.</li>
           </ul>
 
-          <p class="big-statement">Cada exame que não acontece é <span class="accent">uma venda de óculos que vai para o concorrente.</span></p>
+          <p class="big-statement">Cada exame perdido é <span class="accent">um óculos vendido pelo concorrente.</span></p>
         </div>
       </div>
     </div>
@@ -168,7 +177,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="section__inner">
         <div class="section-head">
           <p class="eyebrow">A conta que ninguém faz</p>
-          <h2 id="s3-title">Você paga pelo anúncio, o paciente chega até você e a venda se perde no WhatsApp.</h2>
+          <h2 id="s3-title">Você paga o anúncio, o paciente chega e a venda se perde no WhatsApp.</h2>
         </div>
         <div class="section-body">
           <p>Faça a conta da sua ótica, só desta semana:</p>
@@ -178,8 +187,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>Quantas pediram para remarcar e sumiram?</li>
             <li>Quantas deixaram o contato e nunca foram chamadas?</li>
           </ol>
-          <p>Agora multiplique pelo valor de um óculos completo. Esse é o dinheiro que sua ótica deixa na mesa todo mês, sem aparecer em nenhum relatório.</p>
-          <p class="big-statement">O problema não é falta de paciente. <span class="accent">É falta de alguém para responder, confirmar e chamar de novo, na hora certa.</span></p>
+          <p>Multiplique pelo valor de um óculos completo. É o que sua ótica perde todo mês, sem aparecer em relatório.</p>
+          <p class="big-statement">O problema não é falta de paciente. <span class="accent">É falta de resposta na hora certa.</span></p>
         </div>
       </div>
     </div>
@@ -191,7 +200,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="section__inner">
         <div class="section-head">
           <p class="eyebrow">Por que acontece</p>
-          <h2 id="s4b-title">Não é culpa da sua equipe. Nenhuma pessoa consegue atender o balcão e o WhatsApp 24 horas por dia.</h2>
+          <h2 id="s4b-title">Não é culpa da sua equipe. Ninguém atende balcão e WhatsApp 24h por dia.</h2>
         </div>
         <div class="section-body">
           <ul class="tick-list">
@@ -200,7 +209,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>Confirmar um por um, todo dia, é o primeiro trabalho que fica para depois.</li>
             <li>Chamar de novo quem faltou ou sumiu quase nunca acontece.</li>
           </ul>
-          <p>Por isso criamos o <strong>Agendamento com IA</strong>: anúncios que trazem os pacientes e uma Inteligência Artificial que faz o trabalho de agendar, confirmar e remarcar sozinha, a qualquer hora.</p>
+          <p>Por isso criamos o <strong>Agendamento com IA</strong>: anúncios trazem o paciente e a IA agenda, confirma e remarca sozinha.</p>
         </div>
       </div>
     </div>
@@ -212,33 +221,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="section__inner">
         <div class="section-head">
           <p class="eyebrow">Como resolvemos cada dor</p>
-          <h2 id="s5-title">Cada ponto onde sua ótica perde paciente hoje passa a ter alguém cuidando. Só que esse alguém é uma IA.</h2>
+          <h2 id="s5-title">Cada ponto onde sua ótica perde paciente passa a ter uma IA cuidando.</h2>
         </div>
         <div class="section-body">
           <ol class="steps">
             <li class="step">
               <span class="step__n">01</span>
-              <div><h3>"Ninguém novo chega até a ótica."</h3><p class="dim">Criamos e gerenciamos anúncios para pessoas da sua região que precisam fazer o exame de vista.</p></div>
+              <div><h3>"Ninguém novo chega até a ótica."</h3><p class="dim">Anúncios para pessoas da sua região que precisam fazer exame de vista.</p></div>
             </li>
             <li class="step">
               <span class="step__n">02</span>
-              <div><h3>"Pediu horário e ninguém respondeu."</h3><p class="dim">A IA responde na hora, de dia ou de madrugada, mostra os horários livres e o paciente agenda sozinho.</p></div>
+              <div><h3>"Pediu horário e ninguém respondeu."</h3><p class="dim">A IA responde na hora, a qualquer hora, e o paciente agenda sozinho.</p></div>
             </li>
             <li class="step">
               <span class="step__n">03</span>
-              <div><h3>"Agendou e faltou."</h3><p class="dim">A IA confirma na véspera, na manhã do exame e 1 hora antes, com botões para confirmar, remarcar ou avisar que não vai.</p></div>
+              <div><h3>"Agendou e faltou."</h3><p class="dim">A IA confirma na véspera, de manhã e 1h antes, com botões.</p></div>
             </li>
             <li class="step">
               <span class="step__n">04</span>
-              <div><h3>"Pediu para remarcar e sumiu."</h3><p class="dim">O paciente escolhe outro dia ali mesmo no WhatsApp, e o horário antigo volta para a agenda.</p></div>
+              <div><h3>"Pediu para remarcar e sumiu."</h3><p class="dim">O paciente escolhe outro dia no WhatsApp e o horário antigo é liberado.</p></div>
             </li>
             <li class="step">
               <span class="step__n">05</span>
-              <div><h3>"Deixou o contato e nunca foi chamado."</h3><p class="dim">Quem não agendou, quem faltou e quem desmarcou recebe novas mensagens para voltar. Se não responder, a loja recebe um aviso para ligar.</p></div>
+              <div><h3>"Deixou o contato e nunca foi chamado."</h3><p class="dim">A IA chama de novo quem não agendou, faltou ou desmarcou. Sem resposta, a loja liga.</p></div>
             </li>
             <li class="step">
               <span class="step__n">06</span>
-              <div><h3>"Meu vendedor vive no celular."</h3><p class="dim">Sua equipe só atende quem chega para o exame e vende. A agenda do dia já está pronta no painel da loja.</p></div>
+              <div><h3>"Meu vendedor vive no celular."</h3><p class="dim">Sua equipe só atende e vende. A agenda do dia já está no painel.</p></div>
             </li>
           </ol>
         </div>
@@ -254,8 +263,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div>
             <div class="section-head">
               <p class="eyebrow">Na prática</p>
-              <h2 id="s6-title">O paciente que ia faltar remarca sozinho. Em um minuto. Sem ninguém da loja.</h2>
-              <p class="lede dim">Sem a IA, esse paciente simplesmente não apareceria. Com ela, a confirmação chega na véspera, ele toca em "Remarcar", escolhe outro dia e continua na sua agenda.</p>
+              <h2 id="s6-title">O paciente que ia faltar remarca sozinho, em um minuto.</h2>
+              <p class="lede dim">Sem a IA, ele não apareceria. Com ela, toca em "Remarcar", escolhe outro dia e continua na agenda.</p>
             </div>
             <ul class="checklist checklist--pos">
               <li>Mensagens com botões: o paciente resolve em poucos toques</li>
@@ -315,7 +324,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="section__inner section__inner--wide">
         <div class="section-head">
           <p class="eyebrow">Quando ninguém está olhando o WhatsApp</p>
-          <h2 id="s7-title">É fora do horário, no sábado cheio e no feriado que sua ótica mais perde exames.</h2>
+          <h2 id="s7-title">É fora do horário, no sábado e no feriado que sua ótica mais perde exames.</h2>
         </div>
         <div class="section-body">
           <div class="split">
@@ -353,7 +362,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="section__inner">
         <div class="section-head">
           <p class="eyebrow">Chega de achar</p>
-          <h2 id="s8-title">Hoje você não sabe em qual etapa perde seus pacientes. Com o Agendamento com IA, você vê.</h2>
+          <h2 id="s8-title">Você não sabe onde perde pacientes. Com a IA, você vê.</h2>
         </div>
         <div class="section-body">
           <ol class="chain" aria-label="Funil acompanhado">
@@ -363,7 +372,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>Quantos compareceram</li>
             <li>Quantos compraram</li>
           </ol>
-          <p>Painel da loja para a equipe, painel de resultados para o dono e o funil organizado no CRM. Você enxerga onde está o vazamento e quanto cada exame trouxe de venda.</p>
+          <p>Painel da loja, painel de resultados e funil no CRM: você vê onde está o vazamento.</p>
         </div>
       </div>
     </div>
@@ -376,7 +385,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="section-head">
           <p class="eyebrow">Investimento</p>
           <h2 id="s9-title">Quanto custa continuar perdendo exames todo mês?</h2>
-          <p class="lede dim">Tráfego pago e agendamento automático em uma única estrutura, para trazer o paciente e não deixar ele escapar.</p>
+          <p class="lede dim">Tráfego pago e agendamento automático juntos: trazer o paciente e não deixar escapar.</p>
         </div>
         <div class="section-body">
           <div class="offer">
@@ -448,7 +457,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="section-head">
           <p class="badge">Agendamento com IA</p>
           <h2 id="s10-title">Descubra quantos exames sua ótica está perdendo e como recuperar.</h2>
-          <p class="lede dim">Responda algumas perguntas rápidas. Vamos analisar sua agenda de exames e mostrar o Agendamento com IA funcionando, pelo WhatsApp.</p>
+          <p class="lede dim">Responda rápido. Analisamos sua agenda e mostramos o sistema funcionando.</p>
         </div>
         <div class="section-body">
           <form class="form" id="form-analise" novalidate>
@@ -654,7 +663,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="section-body">
           <p class="big-statement">Se a sua ótica não responder na hora, <span class="accent">o concorrente responde.</span></p>
-          <p class="dim">Com o Agendamento com IA, a resposta chega na hora, o horário já sai marcado e o paciente é lembrado até o dia do exame.</p>
+          <p class="dim">Com o Agendamento com IA, a resposta chega na hora e o horário já sai marcado.</p>
 
           <div class="cta-brand">
             <span class="cta-brand__name">Agendamento com IA</span>
@@ -698,9 +707,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   // Headline por link (?h=1 a ?h=4): para comparar versões e para cada anúncio abrir com a frase dele.
   (function () {
     var H = {
-      2: 'Quantos exames de vista sua ótica perdeu este mês <span class=\"accent\">por falta de alguém para responder o WhatsApp?</span>',
-      3: 'Paciente que não é respondido na hora <span class=\"accent\">marca o exame no concorrente.</span>',
-      4: 'Cada paciente que falta ou desiste do exame é <span class=\"accent\">uma venda de óculos que sua ótica perdeu.</span>'
+      2: 'Quantos exames sua ótica perdeu <span class=\"accent\">sem resposta no WhatsApp?</span>',
+      3: 'Paciente sem resposta na hora <span class=\"accent\">marca o exame no concorrente.</span>',
+      4: 'Cada paciente que falta é <span class=\"accent\">um óculos que sua ótica deixou de vender.</span>'
     };
     var h = new URLSearchParams(location.search).get('h');
     var el = document.getElementById('hero-title');
