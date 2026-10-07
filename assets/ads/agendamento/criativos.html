@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <title>Criativos · Agendamento com IA</title>
-<!-- Fonte dos 4 criativos de feed (1080x1350). Cada um: criativos.html?v=1..4
-     Gerar PNG: chrome --headless=new --window-size=1080,1350 --screenshot=AG0X.png "file:///.../criativos.html?v=X" -->
+<!-- Fonte dos 4 criativos. Cada um: criativos.html?v=1..4 e o formato em &f=
+     (sem f = feed 4:5 1080x1350; f=sq 1:1 1080x1080; f=story 9:16 1080x1920; f=land 1,91:1 1200x628)
+     Gerar PNG: chrome --headless=new --window-size=1080,1080 --virtual-time-budget=5000 --screenshot=AG0X_1x1.png "file:///.../criativos.html?v=X&f=sq"
+     Saída organizada em AG01/ … AG04/ (uma pasta por anúncio, todos os formatos). -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
@@ -129,6 +131,46 @@
   .slot--neg { border-color: rgba(237,106,128,.45); background: rgba(237,106,128,.05); }
   .slot--neg .slot__n { color: var(--mute); text-decoration: line-through; }
   .loss { margin-top: 20px; text-align: right; font-family: "Archivo", sans-serif; font-weight: 800; font-size: 28px; color: var(--neg); }
+
+  /* ---------- formatos (&f=): feed 4:5 (padrão), sq 1:1, story 9:16, land 1,91:1 ---------- */
+  /* 1:1 · 1080x1080 */
+  html.f-sq, html.f-sq body, html.f-sq .ad { height: 1080px; }
+  html.f-sq .ad { padding: 56px 64px 52px; }
+  html.f-sq .head { margin-top: 30px; }
+  html.f-sq h1 { font-size: 58px; }
+  html.f-sq .visual { margin: 18px 0; }
+  html.f-sq .visual > * { zoom: .74; }
+  html.f-sq .foot { padding-top: 24px; }
+
+  /* 9:16 · 1080x1920 — topo e base livres para a interface de Stories/Reels */
+  html.f-story, html.f-story body, html.f-story .ad { height: 1920px; }
+  html.f-story .ad { padding: 250px 76px 380px; }
+  html.f-story .head { margin-top: 60px; }
+  html.f-story h1 { font-size: 64px; max-width: 930px; }
+  html.f-story .kicker { font-size: 24px; }
+  html.f-story .visual { margin: 40px 0 36px; }
+  html.f-story .visual > * { zoom: 1; }
+
+  /* 1,91:1 · 1200x628 — texto à esquerda, ilustração à direita */
+  html.f-land, html.f-land body { width: 1200px; height: 628px; }
+  html.f-land .ad {
+    width: 1200px; height: 628px; padding: 40px 48px 36px;
+    display: grid; grid-template-columns: 560px 1fr; grid-template-rows: auto 1fr auto; column-gap: 36px;
+  }
+  html.f-land .ad[hidden] { display: none; }
+  html.f-land .brand { grid-column: 1 / -1; }
+  html.f-land .brand svg { width: 32px; height: 32px; }
+  html.f-land .brand b { font-size: 24px; }
+  html.f-land .tag { font-size: 15px; padding: 7px 14px; }
+  html.f-land .head { grid-column: 1; grid-row: 2; margin-top: 26px; }
+  html.f-land .kicker { font-size: 16px; }
+  html.f-land h1 { margin-top: 12px; font-size: 44px; }
+  html.f-land .visual { grid-column: 2; grid-row: 2 / 4; margin: 16px 0 0; }
+  html.f-land .visual > * { zoom: .54; }
+  html.f-land .foot { grid-column: 1; grid-row: 3; padding-top: 20px; gap: 20px; }
+  html.f-land .foot__sep, html.f-land .foot__txt { display: none; }
+  html.f-land .foot__name { font-size: 26px; }
+  html.f-land .cta { font-size: 20px; padding: 14px 22px; }
 </style>
 </head>
 <body>
@@ -271,7 +313,9 @@
 </section>
 
 <script>
-  var v = new URLSearchParams(location.search).get('v') || '1';
+  var q = new URLSearchParams(location.search);
+  var v = q.get('v') || '1';
+  if (q.get('f')) document.documentElement.className = 'f-' + q.get('f');
   document.querySelector('.ad[data-v="' + v + '"]').hidden = false;
 </script>
 </body>
