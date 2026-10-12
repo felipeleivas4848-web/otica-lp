@@ -1,0 +1,5 @@
+# Ótica com IA: buscadores e ferramentas de IA podem ler o site todo.
+User-agent: *
+Allow: /
+
+Sitemap: https://oticacomia.com.br/sitemap.xml
