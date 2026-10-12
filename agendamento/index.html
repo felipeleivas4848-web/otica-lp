@@ -485,8 +485,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="field form-step" hidden>
               <span class="field__label">Onde fica sua ótica?</span>
-              <div class="row2">
-                <input type="text" id="cidade" name="cidade" placeholder="Cidade" aria-label="Cidade" autocomplete="address-level2" required>
+              <div class="row2 row2--uf">
                 <select id="estado" name="estado" aria-label="Estado" required>
                   <option value="" disabled selected>Estado</option>
                   <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option>
@@ -496,20 +495,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option>
                   <option>SE</option><option>TO</option>
                 </select>
+                <input type="text" id="cidade" name="cidade" list="cidades-lista" placeholder="Escolha o estado primeiro" aria-label="Cidade" autocomplete="off" required disabled>
               </div>
+              <datalist id="cidades-lista"></datalist>
+              <p class="field__hint">Escolha o estado e comece a digitar o nome da cidade.</p>
             </div>
 
             <div class="field form-step" hidden>
-              <label for="instagram">Qual o @ do Instagram da sua ótica?</label>
-              <input type="text" id="instagram" name="instagram" placeholder="@suaotica" autocomplete="off" autocapitalize="none" spellcheck="false" required>
+              <label for="instagram">Instagram da sua ótica</label>
+              <input type="text" id="instagram" name="instagram" placeholder="@suaotica ou link do perfil" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="instagram-ajuda">
+              <p class="field__hint" id="instagram-ajuda">Informe o Instagram da unidade que você administra. Se a ótica não tiver, pode deixar em branco.</p>
             </div>
 
             <div class="field form-step" hidden>
-              <span class="field__label">Quais números podemos usar para falar com você?</span>
-              <label for="whatsapp" class="dim">Seu WhatsApp</label>
-              <input type="tel" id="whatsapp" name="whatsapp" inputmode="numeric" placeholder="(00) 00000-0000" autocomplete="tel" required>
+              <label for="whatsapp">Seu WhatsApp para contato</label>
+              <input type="tel" id="whatsapp" name="whatsapp" inputmode="numeric" placeholder="(DDD) 99999-9999" autocomplete="tel" aria-describedby="whatsapp-ajuda" required>
+              <p class="field__hint" id="whatsapp-ajuda">Digite o número que você realmente utiliza no WhatsApp. Vamos entrar em contato por ele.</p>
+              <label class="check"><input type="checkbox" id="whatsapp_confirmado_usuario" name="whatsapp_confirmado_usuario" value="true" required> Confirmo que este número está correto e possui WhatsApp ativo.</label>
               <label for="telefone_comercial" class="dim" style="margin-top: var(--space-xs)">Telefone ou WhatsApp comercial da ótica</label>
-              <input type="tel" id="telefone_comercial" name="telefone_comercial" inputmode="numeric" placeholder="(00) 0000-0000" required>
+              <input type="tel" id="telefone_comercial" name="telefone_comercial" inputmode="numeric" placeholder="(DDD) 0000-0000" required>
             </div>
 
             <fieldset class="field form-step" hidden>
@@ -596,11 +600,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </fieldset>
 
+            <div class="form-review" id="form-review" hidden>
+              <p class="field__label">Confirme seus dados</p>
+              <dl class="form-review__list" id="form-review-list"></dl>
+            </div>
+
             <p class="form__error" id="form-status" role="alert" aria-live="polite"></p>
             <div class="form-nav">
               <button class="btn btn--sm btn--ghost" type="button" id="btn-voltar" hidden>Voltar</button>
               <button class="btn btn--lg btn--block" type="button" id="btn-proxima">Próxima pergunta</button>
               <button class="btn btn--lg btn--block" type="submit" id="btn-enviar" hidden>Quero parar de perder exames</button>
+              <button class="btn btn--sm btn--ghost" type="button" id="btn-corrigir" hidden>Corrigir dados</button>
+              <button class="btn btn--lg btn--block" type="submit" id="btn-confirmar" hidden>Confirmar e enviar</button>
             </div>
             <p class="fineprint">🔒 Seus dados serão utilizados para análise da solicitação e contato comercial.</p>
           </form>

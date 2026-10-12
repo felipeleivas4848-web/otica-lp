@@ -928,6 +928,65 @@ main > .section:first-child { border-top: 0; }
 }
 .form__error:empty { min-height: 0; }
 
+/* --- ajuda, confirmação e revisão dos dados de contato --- */
+@media (min-width: 560px) { .row2--uf { grid-template-columns: 1fr 2fr; } }
+.field input:disabled { opacity: 0.55; cursor: not-allowed; }
+.field input[aria-invalid="true"],
+.field select[aria-invalid="true"] { border-color: var(--neg); }
+.field__hint {
+  font-size: var(--step--1);
+  color: var(--text-dim);
+  line-height: 1.5;
+  margin: 0;
+}
+.field > label.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7em;
+  font-weight: 400;
+  font-size: var(--step--1);
+  line-height: 1.5;
+  cursor: pointer;
+  margin-top: 0.3em;
+}
+.check input {
+  accent-color: var(--accent);
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  margin: 0.15em 0 0;
+}
+.form-review[hidden] { display: none !important; }
+.form-review__list {
+  display: grid;
+  gap: 0;
+  margin: 0.55em 0 0;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+}
+.form-review__row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.1em 1em;
+  align-items: center;
+  padding: 0.75em 1em;
+}
+.form-review__row + .form-review__row { border-top: 1px solid var(--line-soft); }
+.form-review__row dt { font-size: var(--step--1); color: var(--text-dim); }
+.form-review__row dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; grid-column: 1; }
+.form-review__row button {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  font: inherit;
+  font-size: var(--step--1);
+  color: var(--accent);
+  background: none;
+  border: 0;
+  padding: 0.4em 0;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 /* --- formulário em etapas (uma pergunta por vez) --- */
 .form-step[hidden] { display: none !important; }
 
