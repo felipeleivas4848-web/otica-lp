@@ -1229,3 +1229,69 @@ main > .section:first-child { border-top: 0; }
   }
   .hero h1 { filter: none; opacity: 1; }
 }
+
+/* ============================================================
+   BLOG — artigos (/blog/)
+   ============================================================ */
+.breadcrumb { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.06em; color: var(--text-mute); }
+.breadcrumb a { color: var(--text-dim); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); }
+.artigo-meta { font-size: var(--step--1); color: var(--text-mute); }
+
+.artigo > h2 { margin-top: var(--space-l); font-size: var(--step-2); }
+.artigo > h3 { margin-top: var(--space-m); }
+.artigo > h2 + *, .artigo > h3 + * { margin-top: var(--space-s); }
+.artigo > p, .artigo li { line-height: 1.7; }
+.artigo ul, .artigo ol { margin: 0; padding-left: 1.3em; display: grid; gap: 0.45em; }
+.artigo li::marker { color: var(--accent); }
+.artigo strong { color: var(--text); }
+.artigo a:not(.btn) { color: var(--accent); }
+
+.resumo {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.1em 1.3em;
+  display: grid;
+  gap: 0.6em;
+}
+.resumo p:first-child { font-weight: 600; color: var(--text); }
+
+.tabela-wrap { overflow-x: auto; border: 1px solid var(--line-soft); border-radius: var(--radius); }
+.tabela { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 520px; }
+.tabela th, .tabela td { text-align: left; padding: 0.75em 1em; vertical-align: top; }
+.tabela th { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dim); background: var(--surface); }
+.tabela tr + tr td { border-top: 1px solid var(--line-soft); }
+
+.modelo {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 1.1em 1.2em;
+  display: grid;
+  gap: 0.7em;
+}
+.modelo__topo { display: flex; align-items: center; justify-content: space-between; gap: 1em; }
+.modelo__quando { font-family: var(--font-mono); font-size: var(--step--1); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.modelo__texto { white-space: pre-line; line-height: 1.6; color: var(--text); margin: 0; }
+.modelo__copiar {
+  font: inherit; font-size: var(--step--1); color: var(--text-dim);
+  background: transparent; border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.35em 0.9em; cursor: pointer; flex: none;
+}
+.modelo__copiar:hover { color: var(--text); border-color: var(--accent); }
+
+.artigo-cta {
+  margin-top: var(--space-l);
+  background: var(--surface);
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.3em, 4vw, 2em);
+  display: grid;
+  gap: var(--space-s);
+}
+.artigo-cta h2 { font-size: var(--step-2); margin: 0; }
+
+.lista-artigos { display: grid; gap: 1rem; }
+.lista-artigos a { text-decoration: none; }
