@@ -608,3 +608,16 @@ if (form) {
     }
   });
 }
+
+/* Celular: o botão do formulário é fixo no rodapé (styles.css). Só mostra com o formulário na tela. */
+(function () {
+  const secao = document.querySelector(".section--form");
+  if (!secao) return;
+  function confere() {
+    const r = secao.getBoundingClientRect();
+    document.body.classList.toggle("form-na-tela", r.top < window.innerHeight * 0.85 && r.bottom > 0);
+  }
+  window.addEventListener("scroll", confere, { passive: true });
+  window.addEventListener("resize", confere);
+  confere();
+})();
